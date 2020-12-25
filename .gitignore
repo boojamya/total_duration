@@ -1,0 +1,10 @@
+__pycache__
+.vscode
+archive
+build
+dist
+env
+ 
+.DS_Store
+.pylintrc
+test.py
