@@ -4,6 +4,7 @@ archive
 build
 dist
 env
+ffprobe
  
 .DS_Store
 .pylintrc
