@@ -7,7 +7,7 @@ from textwrap import dedent
 
 import pyperclip
 from PyQt5.QtCore import QRunnable, Qt, QThread, QThreadPool, pyqtSignal, pyqtSlot, QProcess
-from PyQt5.QtGui import QColor, QFont
+from PyQt5.QtGui import QColor, QFont, QIcon
 from PyQt5.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
                              QMainWindow, QMessageBox, QPushButton,
                              QVBoxLayout, QWidget)
@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
-        self.setWindowTitle(f'TD {version}')
+        self.setWindowTitle('TD')
         self.setWindowOpacity(0.9) #-- Why? IDK, I think it's cool.
 
         self.bg_color = self.palette()
@@ -58,7 +58,7 @@ class MainWindow(QMainWindow):
             )
 
         self.top_label = QLabel()
-        self.top_label.setFont(QFont("Arial", 15))
+        self.top_label.setFont(QFont("Arial", 14))
         self.top_label.setStyleSheet('color: white')
         self.top_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
         self.top_label.setCursor(Qt.IBeamCursor)
@@ -68,28 +68,20 @@ class MainWindow(QMainWindow):
         hLine.setStyleSheet('color: white')
 
         self.bottom_label = QLabel()
-        self.bottom_label.setFont(QFont("Arial", 15))
+        self.bottom_label.setFont(QFont("Arial", 14))
         self.bottom_label.setStyleSheet('color: white')
         self.bottom_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
         self.bottom_label.setCursor(Qt.IBeamCursor)
 
-        info_black_path = resource_path('images/info_black.png')
-        info_blue_path = resource_path('images/info_blue.png')
+        info_button_image_path = resource_path('./images/info_black.png')
 
         self.infoButton = QPushButton('', self)
-        self.infoButton.setStyleSheet('''
-        QPushButton {{
-            border-image: url({0});
-            }}
-            
-        QPushButton:Hover {{
-            border-image: url({1});
-            }}
-        '''.format(info_black_path, info_blue_path))
-
+        self.infoButton.setIcon(QIcon(info_button_image_path))
         self.infoButton.setCursor(Qt.PointingHandCursor)
         self.infoButton.clicked.connect(self.show_infoButton_message)
-        self.infoButton.setMaximumWidth(16)
+        self.infoButton.setMaximumWidth(30)
+        self.infoButton.setToolTip("Info")
+        self.infoButton.setFlat(True)
         
         #-------Layout Containers---------
         topHBox = QHBoxLayout()
@@ -215,14 +207,16 @@ class MainWindow(QMainWindow):
         return f'{round(size, 2)} {power_labels[n]}'
 
     def show_infoButton_message(self):
-        message = '''
+        message = f'''
         <h3>Drag and Drop:</h3> 
         <p>Drag and drop media files onto app to caclulate total duration.</p>
         <h3><strong>Keyboard Shortcuts:</h3>
-        <p style="text-indent: 15px;"><strong>d</strong> - Copy duration, close app</p>
-        <p style="text-indent: 15px;"><strong>c</strong> - Close app</p>
+        <p style="text-indent: 15px;"><strong>c</strong> - Copy duration, close app</p>
+        <p style="text-indent: 15px;"><strong>q</strong> - Close app</p>
         <br>
-        <p>*BEWARE: This app works with folders and is recursive<p>
+        <p>* This app is recursive; will dig through folders.<p>
+        <br>
+        v {version}
         '''
         Information_Message(message)
 
@@ -252,23 +246,27 @@ class MainWindow(QMainWindow):
         urls = data_obj.urls()
         self.setPalette(self.bg_color)
         file_path_list = []
-        for x in range(len(urls)):
-            file_path_list.append(urls[x].path())
+        if sys.platform == 'win32':
+            for x in range(len(urls)):
+                file_path_list.append(urls[x].path()[1:])
+        else:
+            for x in range(len(urls)):
+                file_path_list.append(urls[x].path())
         self.reset_vars()
         self.consolodate_files(file_path_list)
 
     #------KEYPRESS EVENTS-------------------------------------   
     def keyPressEvent(self, event):
         super(MainWindow, self).keyPressEvent(event)
+        if event.key() == Qt.Key_Q:
+            self.q_keyPress()
         if event.key() == Qt.Key_C:
-            self.c_keyPress()
-        if event.key() == Qt.Key_D:
-            self.d_keypress()
+            self.c_keypress()
 
-    def c_keyPress(self):
+    def q_keyPress(self):
         sys.exit(0)
 
-    def d_keypress(self):
+    def c_keypress(self):
         pyperclip.copy(str(datetime.timedelta(seconds=round(duration_GLOBAL))))
         sys.exit(0)
 
@@ -349,7 +347,7 @@ class Worker(QRunnable):
 
             width_test = find_width.findall(ffprobe_output)
             if len(width_test) > 0:
-                width = width_test[0][1]
+                width = width_test[0][1].rstrip() #rstrip is a MS Windows fix
                 height = find_height.findall(ffprobe_output)[0][1]
                 resolution = (f'{width}x{height}')
             else:
@@ -390,11 +388,11 @@ class Information_Message(QMessageBox):
     def __init__(self, message, *args, **kwargs):
         super().__init__()
         self.setIcon(QMessageBox.Information)
-        self.setInformativeText(message + str(ffprobe_output))
+        self.setInformativeText(message)
         self.exec_()
 
 
-class ErrorFiles_Message (QMessageBox):
+class ErrorFiles_Message(QMessageBox):
     def __init__(self, *args, **kwargs):
         super().__init__()
         list_of_files = '\n'.join(errorFiles_GlOBAL)
