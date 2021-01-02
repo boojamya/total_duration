@@ -415,17 +415,13 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath('.'), relative_path) 
 
-
-
 try:
-    # Include in try/except block if you're also targeting Mac/Linux
+    # Windows only(for icon)???
     from PyQt5.QtWinExtras import QtWin
     myappid = 'mycompany.myproduct.subproduct.version'
     QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
 except ImportError:
     pass
-
-
 
 
 if __name__ == '__main__':
