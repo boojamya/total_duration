@@ -316,7 +316,7 @@ class Worker(QRunnable):
         self.run_ffprobe(is_image_BOOL)
 
     def run_ffprobe(self, is_image_BOOL):
-        program = './ffprobe'
+        program = str(Path('./ffprobe'))
         if is_image_BOOL == False:
             args = ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'format=duration,size:stream=width,height,r_frame_rate', self.filePath]
         else:
@@ -415,7 +415,21 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath('.'), relative_path) 
 
+
+
+try:
+    # Include in try/except block if you're also targeting Mac/Linux
+    from PyQt5.QtWinExtras import QtWin
+    myappid = 'mycompany.myproduct.subproduct.version'
+    QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
+except ImportError:
+    pass
+
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon('GTD_icon.ico')) # MS Windows only
     window = MainWindow()
     sys.exit(app.exec_())
