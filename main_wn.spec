@@ -5,7 +5,7 @@ block_cipher = None
 a = Analysis(['main.py'],
              pathex=['C:\\Users\\Dan\\Downloads\\total_duration-master\\total_duration-master'],
              binaries=[('./ffprobe.exe', '.')],
-             datas=[('GTD_icon.ico', '.')],
+             datas=[('images\GTD_icon.ico', '.')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -32,5 +32,5 @@ exe = EXE(pyz,
           upx_exclude=[],
           runtime_tmpdir=None,
           console=False,
-          icon='GTD_icon.ico')
+          icon='images\GTD_icon.ico')
           

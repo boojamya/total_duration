@@ -415,17 +415,13 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath('.'), relative_path) 
 
-try:
-    # Windows only(for icon)???
-    from PyQt5.QtWinExtras import QtWin
-    myappid = 'mycompany.myproduct.subproduct.version'
-    QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
-except ImportError:
-    pass
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon('GTD_icon.ico')) # MS Windows only
+    try:
+        # MS Windows only
+        app.setWindowIcon(QIcon(resource_path('images/GTD_icon.ico'))) 
+    except:
+        pass
     window = MainWindow()
     sys.exit(app.exec_())
