@@ -5,7 +5,7 @@ block_cipher = None
 a = Analysis(['main.py'],
              pathex=['C:\\Users\\Dan\\Downloads\\total_duration-master\\total_duration-master'],
              binaries=[('./ffprobe.exe', '.')],
-             datas=[('images\GTD_icon.ico', '.')],
+             datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -15,7 +15,7 @@ a = Analysis(['main.py'],
              cipher=block_cipher,
              noarchive=False)
 
-a.datas += [('./images/info_black.png', './images/info_black.png', 'DATA')]
+a.datas += [('./images/info_black.png', './images/info_black.png', 'DATA'), ('./images/GTD_icon.png', './images/GTD_icon.png', 'DATA')]
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,

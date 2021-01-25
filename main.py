@@ -420,7 +420,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     try:
         # MS Windows only
-        app.setWindowIcon(QIcon(resource_path('images/GTD_icon.ico'))) 
+        app.setWindowIcon(QIcon(resource_path('images/GTD_icon.png'))) 
     except:
         pass
     window = MainWindow()

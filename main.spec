@@ -1,11 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
-
+import os, sys
 block_cipher = None
 
+dir_path = os.getcwd()
+if sys.platform == 'darwin':
+    ffprobe_location = 'ffprobe'
+else:
+    ffprobe_location = 'ffprobe.exe'
 
 a = Analysis(['main.py'],
-             pathex=['/Users/dkanefsk/Desktop/_Python_app/Get_Total_Duration'],
-             binaries=[('ffprobe', '.')],
+             pathex=[dir_path],
+             binaries=[(ffprobe_location, '.')],
              datas=[],
              hiddenimports=[],
              hookspath=[],
@@ -19,6 +24,8 @@ a = Analysis(['main.py'],
 a.datas += [('./images/info_black.png', './images/info_black.png', 'DATA'), ('./images/GTD_icon.png', './images/GTD_icon.png', 'DATA')]
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
+
+if sys.platform == 'darwin':
     exe = EXE(pyz,
             a.scripts,
             [],
@@ -45,3 +52,20 @@ pyz = PYZ(a.pure, a.zipped_data,
                     'NSHighResolutionCapable' : 'True'
                     }
                 )
+
+if sys.platform == 'win32' or sys.platform == 'win64' or sys.platform == 'linux':
+    exe = EXE(pyz,
+            a.scripts,
+            a.binaries,
+            a.zipfiles,
+            a.datas,
+            [],
+            name='Total Duration',
+            debug=False,
+            bootloader_ignore_signals=False,
+            strip=False,
+            upx=True,
+            upx_exclude=[],
+            runtime_tmpdir=None,
+            console=False,
+            icon='images/GTD_icon.ico')
