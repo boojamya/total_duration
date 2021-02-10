@@ -3,7 +3,7 @@ import os, sys
 block_cipher = None
 
 dir_path = os.getcwd()
-if sys.platform == 'darwin':
+if sys.platform == 'darwin' or sys.platform == 'linux':
     ffprobe_location = 'ffprobe'
 else:
     ffprobe_location = 'ffprobe.exe'
@@ -68,4 +68,6 @@ if sys.platform == 'win32' or sys.platform == 'win64' or sys.platform == 'linux'
             upx_exclude=[],
             runtime_tmpdir=None,
             console=False,
-            icon='images/GTD_icon.ico')
+            icon='images/GTD_icon.png')
+
+            #TODO I changed icon to .png for linux. Is this OK for windows?
