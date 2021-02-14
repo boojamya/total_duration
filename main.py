@@ -418,10 +418,6 @@ def resource_path(relative_path):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    try:
-        # MS Windows only
-        app.setWindowIcon(QIcon(resource_path('images/GTD_icon.png'))) 
-    except:
-        pass
+    app.setWindowIcon(QIcon(resource_path('images/GTD_icon.png'))) # MS Windows only
     window = MainWindow()
     sys.exit(app.exec_())
