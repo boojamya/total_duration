@@ -54,6 +54,10 @@ if sys.platform == 'darwin':
                 )
 
 if sys.platform == 'win32' or sys.platform == 'win64' or sys.platform == 'linux':
+    if sys.platform == 'linux':
+        icon_file = 'images/GTD_icon.png'
+    else:
+        icon_file = 'images/GTD_icon.ico'
     exe = EXE(pyz,
             a.scripts,
             a.binaries,
@@ -68,6 +72,4 @@ if sys.platform == 'win32' or sys.platform == 'win64' or sys.platform == 'linux'
             upx_exclude=[],
             runtime_tmpdir=None,
             console=False,
-            icon='images/GTD_icon.png')
-
-            #TODO I changed icon to .png for linux. Is this OK for windows?
+            icon=icon_file)
