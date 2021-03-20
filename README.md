@@ -20,12 +20,11 @@ Select files and/or folders, drag and drop onto app.
 
 It is recursive so it will dig through all folders.
 
----
 ## **Installation**
 #### **DIRECT DOWNLOAD**
-You can download the fully built app under the "Releases" section of this Github page. 
+You can download the fully built app under the "Releases" section of this Github page.  
+Or...
   
-
 #### **MANUAL BUILD**
 **You will need to download a static version of ffprobe**  
 > Visit https://www.ffmpeg.org/download.html where you can download the ffmpeg package (includes ffprobe) depending on your OS.  
