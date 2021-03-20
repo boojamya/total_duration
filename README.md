@@ -16,12 +16,21 @@ Tested on:
 - Linux
 
 ## How to Use
-Select files and/or folders, drag and drop onto app.
+Select files and/or folders, drag and drop onto app. 
 
+It is recursive so it will dig through all folders.
 
-## Installation
-**You will need to download a static version of ffprobe.**  
-> Visit https://www.ffmpeg.org/download.html where you can download the ffmpeg package (includes ffprobe). Look under the "Get packages & executable files" section.  
+---
+## **Installation**
+#### **DIRECT DOWNLOAD**
+You can download the fully built app under the "Releases" section of this Github page. 
+  
+
+#### **MANUAL BUILD**
+**You will need to download a static version of ffprobe**  
+> Visit https://www.ffmpeg.org/download.html where you can download the ffmpeg package (includes ffprobe) depending on your OS.  
+Look under the "Get packages & executable files" section.  
+
 After downloading, drag the ffprobe executable into the Get_Total_Duartion folder.
 
 It's recomeneded to create a virtual environment and activate.
@@ -42,4 +51,4 @@ The app will be built in *Get_Total_Duration > dist*
 ## Trouble Shoot Build
 If you used PyEnv to install Python, you may get a "Python Library not Found error."  
 You will need to use the "--enable-shared" arguments when installing python. See below.
-https://pyinstaller.readthedocs.io/en/stable/development/venv.html
+[pyinstaller docs]https://pyinstaller.readthedocs.io/en/stable/development/venv.html
