@@ -1,7 +1,7 @@
 # Total Duration 
 Calculates total duration and list resolution and frame rates of media files. 
 
-![ReadMe image](images/readme_img.png)
+![ReadMe image](images/readme_gif.gif)
 
 Works with: 
 - video
