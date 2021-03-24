@@ -49,7 +49,7 @@ The app will be built in *Get_Total_Duration > dist*
 
 ## BONUS: MacOS Right-Click Service
 You can install a right-click service to run Total Duration striaght from Finder.  
-This service is available with the "Total Duration.workflow" file from the Releases section of this github page. 
+This service is available with the "Total Duration.workflow" file from the Releases section of this github page.  
 *Total Duration app must be in Applications Folder for this to work.*
 
 ![ReadMe right-click service](images/readme_service.png)
@@ -61,5 +61,5 @@ If you prefer to create the service yourself, here is how to do it in Automator.
 
 ## Troubleshoot Build
 If you used PyEnv to install Python, you may get a "Python Library not Found error."  
-You will need to use the "--enable-shared" arguments when installing python. See below.
-[pyinstaller docs]https://pyinstaller.readthedocs.io/en/stable/development/venv.html
+You will need to use the "--enable-shared" arguments when installing python. See: 
+https://pyinstaller.readthedocs.io/en/stable/development/venv.html
