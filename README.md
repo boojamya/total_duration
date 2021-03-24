@@ -1,7 +1,7 @@
 # Total Duration 
 Calculates total duration and list resolution and frame rates of media files. 
 
-![ReadMe image](images/readme_gif.gif)
+![ReadMe main gif image](images/readme_gif.gif)
 
 Works with: 
 - video
@@ -47,7 +47,19 @@ pyinstaller main.spec
 ```
 The app will be built in *Get_Total_Duration > dist* 
 
-## Trouble Shoot Build
+## BONUS: MacOS Right-Click Service
+You can install a right-click service to run Total Duration striaght from Finder.  
+This service is available with the "Total Duration.workflow" file from the Releases section of this github page. 
+*Total Duration app must be in Applications Folder for this to work.*
+
+![ReadMe right-click service](images/readme_service.png)
+
+OR...  
+If you prefer to create the service yourself, here is how to do it in Automator.
+
+![ReadMe right-click automator setup](images/readme_serviceAutomator.png)
+
+## Troubleshoot Build
 If you used PyEnv to install Python, you may get a "Python Library not Found error."  
 You will need to use the "--enable-shared" arguments when installing python. See below.
 [pyinstaller docs]https://pyinstaller.readthedocs.io/en/stable/development/venv.html
