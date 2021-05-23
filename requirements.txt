@@ -1,9 +1,9 @@
 altgraph==0.17
 macholib==1.14
-pyinstaller==4.2
+pyinstaller==4.3
 pyinstaller-hooks-contrib==2021.1
 pyperclip==1.8.2
-PyQt5==5.15.3
+PyQt5==5.14.2
 PyQt5-Qt==5.15.2
 PyQt5-Qt5==5.15.2
 PyQt5-sip==12.8.1
